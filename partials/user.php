@@ -1,3 +1,31 @@
+<?php 
+
+    # import config file
+    include('./config.php');
+
+    # user varaibles
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
+    $cpassword = md5($_POST['cpassword']);
+
+    # insert query execution
+    $sql = "INSERT INTO users (username, password, confirm_password) 
+    VALUES ('$username', '$password', '$cpassword')";
+
+    if($conn->query($sql)) 
+    {
+        echo 'User created successfully';
+    }
+    else{
+        echo 'Error: User not created!' . $conn->error;
+    }
+        # check if passwords match and
+        # add confirmation to the database
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +40,7 @@
         <h2>User Account</h2>
 
         <div class="form">
-            <form method="post" action="./partials/login.php">
+            <form method="post" action="">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
 
@@ -20,7 +48,7 @@
                 <input type="password" id="password" name="password" required>
                 
                 <label for="password">Password confirm</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="cpassword" required>
                 
                 <input type="submit" value="Login">
               </form>
